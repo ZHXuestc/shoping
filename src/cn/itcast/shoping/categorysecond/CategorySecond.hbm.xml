@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+  <class name="cn.itcast.shoping.categorysecond.CategorySecond" table="categorysecond">
+    <id name="csid" column="csid">
+      <generator class="native"></generator>
+    </id>
+    
+    <property name="csname" column="csname"></property>
+    <!-- 一的哪一方作为外键 -->
+    <many-to-one name="category" class="cn.itcast.shoping.category.Category" column="cid"></many-to-one>
+    
+    <!-- 配置商品和二级分类的映射关系 -->
+    <set name="product" lazy="false">
+      <key column="csid"></key>
+      <one-to-many class="cn.itcast.shoping.product.Product"/>
+    </set>
+    
+  </class>
+</hibernate-mapping>    

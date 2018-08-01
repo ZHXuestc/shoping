@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+      <class name="cn.itcast.shoping.order.OrderItem" table="orderitem">
+        <id name="itemid" column="itemid">
+        <generator class="native"></generator>
+        </id>
+        
+        <!-- 配置订单项和商品的映射关系，一对多 -->
+        <many-to-one name="product" class="cn.itcast.shoping.product.Product" column="pid" lazy="false"></many-to-one>
+        <!-- 配置订单项和订单的映射关系，多对一 -->
+        <many-to-one name="order" class="cn.itcast.shoping.order.Order" column="oid"></many-to-one>
+        
+        
+        <property name="subtotal" column="subtotal"></property>
+        <property name="count" column="count"></property>
+      </class>
+      
+      
+    </hibernate-mapping>

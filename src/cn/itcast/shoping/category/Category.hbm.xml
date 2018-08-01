@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+  <class name="cn.itcast.shoping.category.Category" table="category">
+    <id name="cid" column="cid">
+      <generator class="native"></generator>
+    </id>
+   
+    
+    <set name="categorySeconds" lazy="false" order-by="csid">
+      <key column="cid"></key>
+      <one-to-many class="cn.itcast.shoping.categorysecond.CategorySecond"/>
+    </set>
+   <!-- 配置其他属性 -->
+  <property name="cname" column="cname"/>
+  </class>    
+</hibernate-mapping>

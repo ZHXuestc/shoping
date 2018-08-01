@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!--  配置类和表对应 
+		class标签
+		name属性：实体类全路径
+		table属性：数据库表名称
+	-->
+  <class name="cn.itcast.shoping.order.Order" table="orders">
+  <!-- 配置唯一标识 -->
+    <id name="oid" column="oid">
+      <generator class="native"></generator>
+    </id>
+    
+     <!-- 配置订单和用户是多对一的映射关系 -->
+     <!-- 配置订单和订单项的关联关系   保存订单:在保存订单的同时还要保存它的订单项，所以要用到级联
+                  在查询的时候要是查询某一个表的关联表，需要经对应的关联项的lazy设为false，即同时查询。或则会出现 no session 的异常错误
+     -->
+       <many-to-one name="user" class="cn.itcast.shoping.user.User" column="uid" lazy="false"></many-to-one>
+        
+       <!-- 配置订单中所包含的订单项，订单和订单项是一对多关系 -->
+       <set name="orderItems" cascade="save-update"  lazy="false">
+         <key column="oid"></key>
+         <one-to-many class="cn.itcast.shoping.order.OrderItem"/>
+       </set>
+    
+     <!-- 配置普通属性 -->
+     <property name="total" column="total"/>
+     <property name="ordertime" column="ordertime"/>
+     <property name="state" column="state"/>
+     <property name="addr" column="addr"/>
+     <property name="phone" column="phone"/>
+     <property name="name" column="name"/>
+     
+    
+  </class>
+</hibernate-mapping>   

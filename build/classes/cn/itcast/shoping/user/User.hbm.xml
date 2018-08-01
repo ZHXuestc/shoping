@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+  <class name="cn.itcast.shoping.user.User" table="user">
+    <id name="uid" column="uid">
+      <generator class="native"></generator>
+    </id>
+    
+    <set name="orders">
+      <key column="uid"></key>
+      <one-to-many class="cn.itcast.shoping.order.Order"/>
+    </set>
+    
+    <property name="username" column="username"></property>
+    <property name="password" column="password"></property>
+    <property name="name" column="name"></property>
+    <property name="phone" column="phone"></property>
+    <property name="addr" column="addr"></property>
+    <property name="email" column="email"></property>
+    <property name="sex" column="sex"></property>
+    <property name="state" column="state"></property>
+    <property name="code" column="code"></property>
+  </class>
+</hibernate-mapping>    
